@@ -1,0 +1,1 @@
+aws iam attach-role-policy --role-name frontend-revolution-dev --policy-arn arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
