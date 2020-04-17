@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            table {
+            border-collapse: collapse;
+            }
+            table, td {
+            border: 1px solid black;
+            padding: 3px;
+            text-align: left;
+            font-family:arial;
+            size:8;
+            }
+            th {
+            border: 1px solid black;
+            padding: 3px;
+            text-align: left;
+            background-color: #827ffe;
+            color: white;
+            }
+            p {
+            font-family: "Trebuchet MS", Helvetica, sans-serif
+            }
+        </style>
+    </head>
+
+<body>
+
+    <form action="/api/update_activity_switch" method="POST">
+        <table>
+            <tr>
+            <th>session_id</th>  
+            <th>video_id</th>
+            <th>supply_group_id</th>
+            <th>updated</th>
+            <th>activity_switch</th>
+            <th>update_activity_switch</th>
+            
+            </tr>
+
+
+            {% for li in data %}
+                    <tr>
+                        <td>{{li.session_id}}</td>
+                        <td>{{li.video_id}}</td>
+                        <td>{{li.supply_group_id}}</td>
+                        <td>{{li.updated}}</td>
+                        <td>{{li.activity_switch}}</td>
+                        <td>
+                            <select name={{li.session_id}}>
+                                <option></option>
+                                <option value="True">True</option>
+                                <option value="False">False</option>
+                            </select>
+                        </td>
+                    </tr>
+            {% endfor %}
+        </table>
+
+
+        <div style="float: right;">
+            <button class="btn btn-success text-center" type="submit" name="button" style="margin:5px;">
+                PUBLISH
+            </button>
+        </div>
+        
+    </form>
+
+</body>
+
+</html>
