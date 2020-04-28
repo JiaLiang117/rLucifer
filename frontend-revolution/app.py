@@ -195,52 +195,52 @@ class Board(object):
 
 
 
-
-
-
-
 class engine(object):
 
     def __init__(self, board, bids):
         self.board = board
-        self.bids = bids
-        self.people_location_decoder = {
-            "general": "fortress", 
-            "captain": "harbour",
-            "innkeeper": "tavern",
-            "magistrate": "townhall",
-            "priest": "cathedral",
-            "aristocrat": "plantation",
-            "merchant": "market"}
+        self.bids = {player_id: self.validate_bid(bid) for player_id, bid in bids.items()}
+
+        self.red = [1, 1000, 0]
+        self.black = [1, 0, 1000000]
+        self.brown = [1, 1000, 1000000]
+        self.red_black = [1, 0, 0]
 
         self.location_bid_value = {
-            "general": {"gold":1, "blackmail": 1000, "force": 0}, 
-            "captain": {"gold":1, "blackmail": 1000, "force": 0}, 
-            "innkeeper": {"gold":1, "blackmail": 0, "force": 1000000}, 
-            "magistrate": {"gold":1, "blackmail": 0, "force": 1000000}, 
-            "priest": {"gold":1, "blackmail": 1000, "force": 1000000}, 
-            "aristocrat": {"gold":1, "blackmail": 1000, "force": 1000000}, 
-            "merchant": {"gold":1, "blackmail": 1000, "force": 1000000},
-            "printer": {"gold":1, "blackmail": 1000, "force": 1000000}, 
-            "rogue": {"gold":1, "blackmail": 0, "force": 0}, 
-            "spy": {"gold":1, "blackmail": 0, "force": 1000000}, 
-            "apothecary": {"gold":1, "blackmail": 1000, "force": 0}, 
-            "mercenary": {"gold":1, "blackmail": 0, "force": 0}, 
+            "general": self.red,
+            "captain": self.red,
+            "innkeeper": self.black,
+            "magistrate": self.black,
+            "priest": self.brown,
+            "aristocrat": self.brown,
+            "merchant": self.brown,
+            "printer": self.brown,
+            "rogue": self.red_black,
+            "spy": self.black,
+            "apothecary": self.red,
+            "mercenary": self.red_black,
         }
 
-        self.support = {
-            "general": 1,
-            "captain": 1,
-            "innkeeper": 3,
-            "magistrate": 1,
-            "priest": 6,
-            "aristocrat": 5, 
-            "merchant": 3,
-            "printer": 10, 
-            "rogue": 0,
-            "spy": 0,
-            "apothecary": 0,
-            "mercenary": 3,}
+        self.result = {}
+
+    def engine(self):
+
+        for key, value in self.location_bid_value.items():
+            pass
+
+
+
+    def check_winner(self, location):
+        bid = self.bids[location]
+        value = self.location_bid_value[location]
+
+    
+    @staticmethod
+    def _compare_bids(bid, value):
+
+        bid = { i: j.get("gold")*1 for i,j in bid.items()}
+        return None
+
 
     @staticmethod
     def validate_bid(bid):
@@ -278,7 +278,30 @@ class engine(object):
 
 
 
-bids = {
-    "player_a": {
-        "general": {"gold":1, "black_mail": 2, "force":0}}
-    }
+
+
+
+
+        self.support = {
+            "general": 1,
+            "captain": 1,
+            "innkeeper": 3,
+            "magistrate": 1,
+            "priest": 6,
+            "aristocrat": 5, 
+            "merchant": 3,
+            "printer": 10, 
+            "rogue": 0,
+            "spy": 0,
+            "apothecary": 0,
+            "mercenary": 3,}
+
+
+        self.people_location_decoder = {
+            "general": "fortress", 
+            "captain": "harbour",
+            "innkeeper": "tavern",
+            "magistrate": "townhall",
+            "priest": "cathedral",
+            "aristocrat": "plantation",
+            "merchant": "market"}
